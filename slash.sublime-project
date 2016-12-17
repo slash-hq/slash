@@ -1,0 +1,14 @@
+{
+  "build_systems": [
+    {
+      "shell_cmd": "swift build -v",
+      "name": "Sublime SPM Build for Swift."
+    }
+  ],
+  "folders": [
+    {
+      "path": ".",
+      "follow_symlinks": true
+    }
+  ]
+}
