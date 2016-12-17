@@ -24,10 +24,6 @@ slash <token>
 `[tab]` Switch between channels </br>
 `[up arrow] / [down arrow]` Scroll messages up/down
 
-## Issues
-
-Please make sure to read the Issue Reporting Checklist before opening an issue. Issues not conforming to the guidelines may be closed immediately.
-
 ## FAQ
 
 1. Can I connect to multiple Slack teams?
@@ -39,6 +35,10 @@ Please make sure to read the Issue Reporting Checklist before opening an issue. 
 Thanks too [cool-retro-term](https://github.com/Swordfish90/cool-retro-term) project slash can run in retro mode
 
 ![screenshot](GitHub/scr_retro.png)
+
+## Issues
+
+Please make sure to read the Issue Reporting Checklist before opening an issue. Issues not conforming to the guidelines may be closed immediately.
 
 ## License
 
