@@ -16,7 +16,7 @@ slash
 Slash can be used with the [development token](https://api.slack.com/docs/oauth-test-tokens) too:
 
 ```
-slash token
+slash <token>
 ```
 ## Issues
 
