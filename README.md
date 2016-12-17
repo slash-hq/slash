@@ -45,7 +45,8 @@ Please make sure to read the Issue Reporting Checklist before opening an issue. 
 1. Fork this repository and clone to your Mac.
 1. Open `slash.xcodeproj` in Xcode
 1. Build
-1. Submit pull request!
+1. Open `Terminal` and run `<DerivedData>/Build/Products/Debug/slash`
+1. Make your changes, test and submit pull request!
 
 ## License
 
