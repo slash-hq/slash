@@ -40,6 +40,13 @@ Thanks too [cool-retro-term](https://github.com/Swordfish90/cool-retro-term) pro
 
 Please make sure to read the Issue Reporting Checklist before opening an issue. Issues not conforming to the guidelines may be closed immediately.
 
+## How to contribute?
+
+1. Fork this repository and clone to your Mac.
+1. Open `slash.xcodeproj` in Xcode
+1. Build
+1. Submit pull request!
+
 ## License
 
 Apache License, Version 2.0
