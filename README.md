@@ -18,6 +18,12 @@ Slash can be used with the [development token](https://api.slack.com/docs/oauth-
 ```
 slash <token>
 ```
+
+## Keyboard shortcuts
+
+`[tab]` Switch between channels </br>
+`[up arrow] / [down arrow]` Scroll messages up/down
+
 ## Issues
 
 Please make sure to read the Issue Reporting Checklist before opening an issue. Issues not conforming to the guidelines may be closed immediately.
