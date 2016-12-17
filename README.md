@@ -7,7 +7,7 @@ Slash is Slack terminal client written in Swift.
 
 ## Getting started
 
-To use `slash` install it via `brew install slash` and run by entering
+To use `slash` install it via `brew install slash` and start it by running:
 
 ```
 slash
