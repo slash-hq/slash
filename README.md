@@ -1,4 +1,4 @@
-<img src="GitHub/slash_logo.png" alt="logo" width="200px;"/>
+<img src="GitHub/slash_logo_small.png" alt="logo" width="200px;"/>
 
 Slash is Slack terminal client written in Swift.
 
