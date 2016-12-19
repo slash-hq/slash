@@ -19,16 +19,14 @@ Slash can be used with the [development token](https://api.slack.com/docs/oauth-
 slash <token>
 ```
 
-## Keyboard shortcuts
+## Keys
 
-`[tab]` Switch between channels </br>
-`[up arrow] / [down arrow]` Scroll messages up/down
-
-## FAQ
-
-1. Can I connect to multiple Slack teams?
-
-  Yes, simply start multiple `slash` instances and login to a different team in each of them.
+```
+Enter  : Send a message
+Tab    : Switch channel
+Up/Down: Scroll messages
+Ctrl-C : Quit
+```
 
 ## Retro mode
 
@@ -47,6 +45,12 @@ Please make sure to read the Issue Reporting Checklist before opening an issue. 
 1. Build
 1. Open `Terminal` and run `<DerivedData>/Build/Products/Debug/slash`
 1. Make your changes, test and submit pull request!
+
+## FAQ
+
+1. Can I connect to multiple Slack teams?
+
+  Yes, simply start multiple `slash` instances and login to a different team in each of them.
 
 ## License
 
