@@ -61,7 +61,7 @@ struct CrashReporter {
             .text("Oooops.... we are really sorry but slash has crashed ☠️ :\n\nSTACKTRACE:\n\n")
             .text(stacktrace)
             .text("\n\n")
-            .text("Please copy this very long link to the browser, to help us with fixing the crash 🙇 \n\nhttps://github.com/glock45/slacky/issues/new?title=\(title)&body=\(body))\n\n")
+            .text("Please copy this very long link to the browser, to help us with fixing the crash 🙇 \n\nhttps://github.com/slash-hq/slash/issues/new?title=\(title)&body=\(body))\n\n")
             .text("Thank you, \nslash Team\n\n")
         .buffer)
         

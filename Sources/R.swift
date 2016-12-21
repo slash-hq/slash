@@ -34,9 +34,9 @@ class R {
         
         static let authConfirmation =
             "<html><body><center>" +
-                "<br><br><img width=\"200\" src=\"https://github.com/glock45/slacky/blob/master/GitHub/slash_logo.png?raw=true\" /><br>" +
+                "<br><br><img width=\"200\" src=\"https://github.com/slash-hq/slash/blob/master/GitHub/slash_logo_small.png?raw=true\" /><br>" +
                 "<h4><span style=\"font-family: Verdana; color: #CCC;\">You can close this window now and continue in the terminal.</span></h4><br>" +
-                "<img width=\"600\"src=\"https://github.com/glock45/slacky/blob/master/GitHub/scr.png?raw=true\"/>" +
+                "<img width=\"600\"src=\"https://github.com/slash-hq/slash/blob/master/GitHub/scr.png?raw=true\"/>" +
             "</center></body></html>"
     }
     
