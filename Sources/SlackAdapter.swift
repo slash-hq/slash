@@ -76,7 +76,13 @@ class SlackAdapter {
                             }
                         }
                     } else {
-                        spans.append(TextSpan(self.escapeHTMLEntities(String(message.characters[escapeStartIndex..<escapeEndIndex])), withColor: R.color.linkTextColor))
+                        var startIndex = escapedCharacters.startIndex
+                        if let i = escapedCharacters.index(of: "|") {
+                            startIndex = escapedCharacters.index(i, offsetBy: 1)
+                        }
+                        let url = escapedCharacters[startIndex..<escapedCharacters.endIndex]
+                        spans.append(TextSpan(self.escapeHTMLEntities(String(url)), withColor: R.color.linkTextColor))
+
                         links.append(String(message.characters[escapeStartIndex..<escapeEndIndex]))
                         spans.append(TextSpan("[" + String(links.count) + "]", withColor: R.color.messageTextColor))
                     }
