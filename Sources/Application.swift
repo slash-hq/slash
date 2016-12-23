@@ -18,6 +18,7 @@ class Application {
     private let rtmClient                       : SlackRealTimeClient
     
     private var messages                        = Array<MessagesListRow>()
+    private var links                           = [String]()
     private var selectedChannel: String?        = nil
     private var replyIdCounter                  = 0
     private var unreadChannelsIds               = Set<String>()
@@ -143,7 +144,7 @@ class Application {
     }
     
     private func messageListRowFor(message: SlackMessage) -> MessagesListRow {
-        let spans = self.adapter.textSpansFor(message: message, withContext: self.context, andLinks: &self.context.links)
+        let spans = self.adapter.textSpansFor(message: message, withContext: self.context, andLinks: &self.links)
         return MessagesListRow(channel: message.channel, id: message.ts, spans: spans)
     }
     
@@ -270,7 +271,7 @@ class Application {
                 self.channelsListView.draw(self.context, selectionId: suggestion.id, unreadIds: self.unreadChannelsIds)
             
                 self.reloadChannel(suggestion.id)
-                self.context.links.removeAll()
+                self.links.removeAll()
                 self.userInputView.draw()
                 
             case .other(let character):
@@ -299,7 +300,7 @@ class Application {
             let pieces = command.components(separatedBy: [",", " "])
             let linkNumbers = pieces.flatMap { Int($0) }
             for linkNumber in linkNumbers {
-                let url = self.context.links[linkNumber - 1]
+                let url = self.links[linkNumber - 1]
                 NSWorkspace.shared().open(NSURL(string: url)! as URL)
             }
             return true

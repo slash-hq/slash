@@ -16,7 +16,6 @@ class SlackContext {
     var channels = [SlackChannel]()
     var groups   = [SlackGroup]()
     var ims      = [SlackIM]()
-    var links    = [String]()
     
     init(withTeam team: SlackTeam) {
         self.teamName = team.name
