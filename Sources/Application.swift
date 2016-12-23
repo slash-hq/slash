@@ -267,6 +267,7 @@ class Application {
                 self.channelsListView.draw(self.context, selectionId: suggestion.id, unreadIds: self.unreadChannelsIds)
             
                 self.reloadChannel(suggestion.id)
+                self.context.links.removeAll()
                 self.userInputView.draw()
                 
             case .other(let character):
