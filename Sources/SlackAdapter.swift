@@ -76,7 +76,7 @@ class SlackAdapter {
                             }
                         }
                     } else {
-                        spans.append(TextSpan(self.escapeHTMLEntities(String(message.characters[escapeStartIndex..<escapeEndIndex])), withColor: R.color.mentionTextColor))
+                        spans.append(TextSpan(self.escapeHTMLEntities(String(message.characters[escapeStartIndex..<escapeEndIndex])), withColor: R.color.linkTextColor))
                     }
                 }
                 spanStart = message.characters.index(escapeEndIndex, offsetBy: 1)
