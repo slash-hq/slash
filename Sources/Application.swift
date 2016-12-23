@@ -5,7 +5,6 @@
 //
 
 import Foundation
-import AppKit
 
 class Application {
     
@@ -301,7 +300,7 @@ class Application {
             let linkNumbers = pieces.flatMap { Int($0) }
             for linkNumber in linkNumbers {
                 let url = self.links[linkNumber - 1]
-                NSWorkspace.shared().open(NSURL(string: url)! as URL)
+                Utils.shell("open", url)
             }
             return true
         }
