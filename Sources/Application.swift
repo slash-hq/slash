@@ -5,6 +5,7 @@
 //
 
 import Foundation
+import AppKit
 
 class Application {
     
@@ -199,19 +200,21 @@ class Application {
 
                 let message = self.userInputView.input
                 
-                try? self.rtmClient.send(targetChannel, message: message, replyId: replyIdCounter)
-                
-                let pendingMessage = MessagesListRow(channel: targetChannel, id: "pending\(replyIdCounter)", spans: [
-                    TextSpan(me.name, withColor: Utils.xterm256Color(forUser: me)),
-                    TextSpan(": ", withColor: R.color.messagePrefixTextColor),
-                    TextSpan(message, withColor: R.color.messageTextColor)], pending: true)
-                
-                self.messages.insert(pendingMessage, at: 0)
-                
-                self.replyIdCounter = self.replyIdCounter + 1
-                
-                self.messagesListView.draw(self.messages)
-                
+                if !self.executeLocalCommand(message) {
+                    try? self.rtmClient.send(targetChannel, message: message, replyId: replyIdCounter)
+                    
+                    let pendingMessage = MessagesListRow(channel: targetChannel, id: "pending\(replyIdCounter)", spans: [
+                        TextSpan(me.name, withColor: Utils.xterm256Color(forUser: me)),
+                        TextSpan(": ", withColor: R.color.messagePrefixTextColor),
+                        TextSpan(message, withColor: R.color.messageTextColor)], pending: true)
+                    
+                    self.messages.insert(pendingMessage, at: 0)
+                    
+                    self.replyIdCounter = self.replyIdCounter + 1
+                    
+                    self.messagesListView.draw(self.messages)
+                }
+                                
                 self.userInputView.input = ""
                 self.userInputView.cursor = 0
                 self.userInputView.draw()
@@ -284,5 +287,24 @@ class Application {
             }
         }
     }
-
+    
+    /// Execute a local "slash" command.
+    ///
+    /// The currently supported list of local commands are;
+    ///
+    /// - /openurl {space separated list of numbers}: opens numbered link in default browser
+    ///
+    func executeLocalCommand(_ command: String) -> Bool {
+        if (command.hasPrefix("/openurl")) {
+            let pieces = command.components(separatedBy: [",", " "])
+            let linkNumbers = pieces.flatMap { Int($0) }
+            for linkNumber in linkNumbers {
+                let url = self.context.links[linkNumber - 1]
+                NSWorkspace.shared().open(NSURL(string: url)! as URL)
+            }
+            return true
+        }
+        
+        return false
+    }
 }
