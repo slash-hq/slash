@@ -142,7 +142,7 @@ class Application {
     }
     
     private func messageListRowFor(message: SlackMessage) -> MessagesListRow {
-        let spans = self.adapter.textSpansFor(message: message, withContext: self.context)
+        let spans = self.adapter.textSpansFor(message: message, withContext: self.context, andLinks: &self.context.links)
         return MessagesListRow(channel: message.channel, id: message.ts, spans: spans)
     }
     
