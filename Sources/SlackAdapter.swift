@@ -26,7 +26,7 @@ class SlackAdapter {
         }
     }
     
-    func textSpansFor(message: SlackMessage, withContext context: SlackContext) -> [TextSpan] {
+    func textSpansFor(message: SlackMessage, withContext context: SlackContext, andLinks links: inout [String]) -> [TextSpan] {
         
         let slackUser = context.user(forId: message.user) ?? SlackUser(id: "", name: "unknonw", color: "", presence: .away)
         
@@ -35,13 +35,13 @@ class SlackAdapter {
         spans.append(TextSpan(self.formatSlackTimestamp(message.ts), withColor: R.color.messageTimeTextColor))
         spans.append(TextSpan(" \(slackUser.name)", withColor: Utils.xterm256Color(forUser: slackUser)))
         spans.append(TextSpan(": ", withColor: R.color.messagePrefixTextColor))
-        spans.append(contentsOf: self.spansFor(message: message.text, withContext: context))
+        spans.append(contentsOf: self.spansFor(message: message.text, withContext: context, andLinks: &links))
         
         return spans
     }
     
     
-    func spansFor(message: String, withContext context: SlackContext) -> [TextSpan] {
+    func spansFor(message: String, withContext context: SlackContext, andLinks links: inout [String]) -> [TextSpan] {
         
         var spans = [TextSpan]()
         
@@ -77,6 +77,8 @@ class SlackAdapter {
                         }
                     } else {
                         spans.append(TextSpan(self.escapeHTMLEntities(String(message.characters[escapeStartIndex..<escapeEndIndex])), withColor: R.color.linkTextColor))
+                        links.append(String(message.characters[escapeStartIndex..<escapeEndIndex]))
+                        spans.append(TextSpan("[" + String(links.count) + "]", withColor: R.color.messageTextColor))
                     }
                 }
                 spanStart = message.characters.index(escapeEndIndex, offsetBy: 1)

@@ -17,6 +17,7 @@ class Application {
     private let rtmClient                       : SlackRealTimeClient
     
     private var messages                        = Array<MessagesListRow>()
+    private var links                           = [String]()
     private var selectedChannel: String?        = nil
     private var replyIdCounter                  = 0
     private var unreadChannelsIds               = Set<String>()
@@ -142,7 +143,7 @@ class Application {
     }
     
     private func messageListRowFor(message: SlackMessage) -> MessagesListRow {
-        let spans = self.adapter.textSpansFor(message: message, withContext: self.context)
+        let spans = self.adapter.textSpansFor(message: message, withContext: self.context, andLinks: &self.links)
         return MessagesListRow(channel: message.channel, id: message.ts, spans: spans)
     }
     
@@ -199,19 +200,21 @@ class Application {
 
                 let message = self.userInputView.input
                 
-                try? self.rtmClient.send(targetChannel, message: message, replyId: replyIdCounter)
-                
-                let pendingMessage = MessagesListRow(channel: targetChannel, id: "pending\(replyIdCounter)", spans: [
-                    TextSpan(me.name, withColor: Utils.xterm256Color(forUser: me)),
-                    TextSpan(": ", withColor: R.color.messagePrefixTextColor),
-                    TextSpan(message, withColor: R.color.messageTextColor)], pending: true)
-                
-                self.messages.insert(pendingMessage, at: 0)
-                
-                self.replyIdCounter = self.replyIdCounter + 1
-                
-                self.messagesListView.draw(self.messages)
-                
+                if !self.executeLocalCommand(message) {
+                    try? self.rtmClient.send(targetChannel, message: message, replyId: replyIdCounter)
+                    
+                    let pendingMessage = MessagesListRow(channel: targetChannel, id: "pending\(replyIdCounter)", spans: [
+                        TextSpan(me.name, withColor: Utils.xterm256Color(forUser: me)),
+                        TextSpan(": ", withColor: R.color.messagePrefixTextColor),
+                        TextSpan(message, withColor: R.color.messageTextColor)], pending: true)
+                    
+                    self.messages.insert(pendingMessage, at: 0)
+                    
+                    self.replyIdCounter = self.replyIdCounter + 1
+                    
+                    self.messagesListView.draw(self.messages)
+                }
+                                
                 self.userInputView.input = ""
                 self.userInputView.cursor = 0
                 self.userInputView.draw()
@@ -267,6 +270,7 @@ class Application {
                 self.channelsListView.draw(self.context, selectionId: suggestion.id, unreadIds: self.unreadChannelsIds)
             
                 self.reloadChannel(suggestion.id)
+                self.links.removeAll()
                 self.userInputView.draw()
                 
             case .other(let character):
@@ -283,5 +287,24 @@ class Application {
             }
         }
     }
-
+    
+    /// Execute a local "slash" command.
+    ///
+    /// The currently supported list of local commands are;
+    ///
+    /// - /openurl {space separated list of numbers}: opens numbered link in default browser
+    ///
+    func executeLocalCommand(_ command: String) -> Bool {
+        if (command.hasPrefix("/openurl")) {
+            let pieces = command.components(separatedBy: [",", " "])
+            let linkNumbers = pieces.flatMap { Int($0) }
+            for linkNumber in linkNumbers {
+                let url = self.links[linkNumber - 1]
+                Utils.shell("open", url)
+            }
+            return true
+        }
+        
+        return false
+    }
 }
