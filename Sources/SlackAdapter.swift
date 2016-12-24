@@ -64,6 +64,13 @@ class SlackAdapter {
                 while escapeEndIndex < message.characters.endIndex && message.characters[escapeEndIndex] != ">" {
                     escapeEndIndex = message.characters.index(escapeEndIndex, offsetBy: 1)
                 }
+
+                guard message.characters.indices.last! >= escapeEndIndex else {
+                    // Not found '>'
+                    spanEnd = message.characters.index(spanEnd, offsetBy: 1)
+                    continue
+                }
+
                 if escapeEndIndex != escapeStartIndex {
                     let escapedCharacters = message.characters[escapeStartIndex..<escapeEndIndex]
                     if escapedCharacters[escapedCharacters.startIndex] == "#" ||
