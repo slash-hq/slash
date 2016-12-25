@@ -28,7 +28,7 @@ class SlackAdapter {
     
     func textSpansFor(message: SlackMessage, withContext context: SlackContext, andLinks links: inout [String]) -> [TextSpan] {
         
-        let slackUser = context.user(forId: message.user) ?? SlackUser(id: "", name: "unknonw", color: "", presence: .away)
+        let slackUser = context.user(forId: message.user) ?? SlackUser(id: "", name: "unknown", color: "", presence: .away)
         
         var spans = [TextSpan]()
         
