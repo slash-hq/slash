@@ -92,10 +92,15 @@ class SlackWebClient {
             users: (object ←← "users").map(
                 { SlackUser(id: $0 ← "id", name: $0 ← "name", color: $0 ← "color", presence: ($0 ← "presence") == "active" ? .active : .away) }
             ),
-            channels: (object ←← "channels").map(
-                { SlackChannel(id: $0 ← "id", name: $0 ← "name",
+            channels: (object ←← "channels").map({
+                SlackChannel(
+                    id: $0 ← "id",
+                    name: $0 ← "name",
                     members: ($0 ←← "members").map({ ($0 as? String) ?? "" }),
-                    topic: $0 ← "topic", general: $0 ← "is_general") }
+                    topic: $0 ← "topic",
+                    general: $0 ← "is_general",
+                    isMember: $0 ← "is_member"
+                )}
             ),
             groups: (object ←← "groups").map(
                 { SlackGroup(id: $0 ← "id", name: $0 ← "name",

@@ -13,4 +13,5 @@ struct SlackChannel {
     let members: [String]
     let topic: String
     let general: Bool
+    let isMember: Bool
 }

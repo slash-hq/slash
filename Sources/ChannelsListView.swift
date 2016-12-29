@@ -66,6 +66,9 @@ class ChannelsListView {
         self.canvas.color(R.color.channelNameTextColor);
         
         for channel in context.channels {
+            if (!channel.isMember) {
+                continue
+            }
         
             self.drawRow("#" + channel.name, row: offset, highlight: channel.id == selectionId, blink: unreadIds.contains(channel.id))
             
