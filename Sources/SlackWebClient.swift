@@ -67,8 +67,11 @@ class SlackWebClient {
             throw SlackWebClientError.error("Could not create URL object.")
         }
         
-        let object = try JSONSerialization.jsonObject(with:
-            try NSURLConnection.sendSynchronousRequest(URLRequest(url: url), returning: nil))
+        let (theData, _) = try URLSession.shared.synchronousDataTask(with: URLRequest(url: url))
+        guard let data = theData else {
+            throw SlackWebClientError.error("Error receiving data.")
+        }
+        let object = try JSONSerialization.jsonObject(with:data)
         
         guard let dict = object as? Dictionary<String, Any> else {
             throw SlackWebClientError.error("\(rpcMethod)'s response is not a dictionary.")
