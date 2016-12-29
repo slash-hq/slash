@@ -58,8 +58,12 @@ class SlackOAuth2 {
                 
                 do {
                     
-                    let object = try JSONSerialization.jsonObject(with:
-                        try NSURLConnection.sendSynchronousRequest(URLRequest(url: url), returning: nil))
+                    let (theData, _) = try URLSession.shared.synchronousDataTask(with: URLRequest(url: url))
+                    guard let data = theData else {
+                        responder(TextResponse(200, "No response from Slack."))
+                        return
+                    }
+                    let object = try JSONSerialization.jsonObject(with:data)
                     
                     guard let dict = object as? Dictionary<String, Any> else {
                         responder(TextResponse(200, "Slack's response is not a dictionary \(object)."))
