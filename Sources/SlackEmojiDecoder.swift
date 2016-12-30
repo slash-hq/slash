@@ -11,6 +11,12 @@ class SlackEmojiDecoder {
     func decode(_ text: String) -> String {
         //TODO - improve this by iterating only once over the text.
         return text
+            .replacingOccurrences(of: ":skin-tone-1:", with: "🏻")
+            .replacingOccurrences(of: ":skin-tone-2:", with: "🏻")
+            .replacingOccurrences(of: ":skin-tone-3:", with: "🏼")
+            .replacingOccurrences(of: ":skin-tone-4:", with: "🏽")
+            .replacingOccurrences(of: ":skin-tone-5:", with: "🏾")
+            .replacingOccurrences(of: ":skin-tone-6:", with: "🏿")
             .replacingOccurrences(of: ":100:", with: "💯 ")
             .replacingOccurrences(of: "<3", with: "❤️ ")
             .replacingOccurrences(of: "</3", with: "💔 ")
