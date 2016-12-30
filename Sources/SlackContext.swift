@@ -28,7 +28,7 @@ class SlackContext {
     
     func suggestRecipient(for selection: String?, unreadIds: Set<String> = [], backwardSearch: Bool) -> (id: String, name: String)? {
         
-        let channels = self.channels.map { ($0.id, $0.name) }
+        let channels = self.channels.filter({ $0.isMember }).map { ($0.id, $0.name) }
         let groups = self.groups.map { ($0.id, $0.name) }
         let ims = self.ims.map { im in
             (im.id, (self.users.filter({ $0.id == im.user }).first?.name) ?? "")
