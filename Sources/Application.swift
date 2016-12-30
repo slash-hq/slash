@@ -128,8 +128,13 @@ class Application {
             
         case .desktopNotification(let title, let message):
 
-            return self.appendRow(MessagesListRow(spans: ["NOTIFICATION", " : ", TextSpan(title)]))
-            
+            #if os(Linux)
+                // Linux notifications not implemented yet
+            #else
+                Process.launchedProcess(launchPath: "/usr/bin/osascript", arguments: ["-e", "display notification \"\(message)\" with title \"slash: \(title)\""])
+            #endif
+            return
+
         case .unknown(let message):
             
             return self.appendRow(MessagesListRow(spans: ["?", " : ", TextSpan(message)]))
