@@ -94,7 +94,7 @@ class SlackRealTimeClient {
                     let name = (dictionary["name"] as? String) ?? ""
                     return .teamRename(name)
                 case "desktop_notification":
-                    let title = ((dictionary["title"] as? String) ?? "") + ((dictionary["subtitle"] as? String) ?? "")
+                    let title = ((dictionary["title"] as? String) ?? "") + " " + ((dictionary["subtitle"] as? String) ?? "")
                     let message = ((dictionary["content"] as? String) ?? "")
                     return .desktopNotification(title, message)
                 default:
