@@ -126,6 +126,10 @@ class Application {
             
             self.channelsListView.draw(self.context, selectionId: self.selectedChannel, unreadIds: self.unreadChannelsIds)
             
+        case .desktopNotification(let title, let message):
+
+            return self.appendRow(MessagesListRow(spans: ["NOTIFICATION", " : ", TextSpan(title)]))
+            
         case .unknown(let message):
             
             return self.appendRow(MessagesListRow(spans: ["?", " : ", TextSpan(message)]))

@@ -29,4 +29,5 @@ enum SlackEvent {
     case userChange
     case reply(Int, String)
     case teamRename(String)
+    case desktopNotification(String, String)
 }
