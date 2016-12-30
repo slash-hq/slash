@@ -52,6 +52,8 @@ class R {
         
         static let helloTextColor = 255
         
+        static let commandTextColor = 201
+        
         static let userInputTextColor = 231
         
         static let userInputBackgorundColor = 16
