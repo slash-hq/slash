@@ -93,6 +93,10 @@ class SlackRealTimeClient {
                 case "team_rename":
                     let name = (dictionary["name"] as? String) ?? ""
                     return .teamRename(name)
+                case "desktop_notification":
+                    let title = ((dictionary["title"] as? String) ?? "") + " " + ((dictionary["subtitle"] as? String) ?? "")
+                    let message = ((dictionary["content"] as? String) ?? "")
+                    return .desktopNotification(title, message)
                 default:
                     return .unknown("\(type) - \(dictionary)")
             }

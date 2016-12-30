@@ -126,6 +126,15 @@ class Application {
             
             self.channelsListView.draw(self.context, selectionId: self.selectedChannel, unreadIds: self.unreadChannelsIds)
             
+        case .desktopNotification(let title, let message):
+
+            #if os(Linux)
+                // Linux notifications not implemented yet
+            #else
+                Process.launchedProcess(launchPath: "/usr/bin/osascript", arguments: ["-e", "display notification \"\(message)\" with title \"slash: \(title)\""])
+            #endif
+            return
+
         case .unknown(let message):
             
             return self.appendRow(MessagesListRow(spans: ["?", " : ", TextSpan(message)]))
