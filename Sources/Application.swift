@@ -7,7 +7,6 @@
 import Foundation
 
 class Application {
-    
     private let terminalDevice                  : TerminalDevice
     private let messagesListView                : MessagesListView
     private let userInputView                   : UserInputView
