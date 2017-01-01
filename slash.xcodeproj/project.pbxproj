@@ -34,6 +34,7 @@
 		7C92EB871E03F3FC00F92267 /* SlackWebClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C92EB7A1E03F3FC00F92267 /* SlackWebClient.swift */; };
 		7C92EB881E03F3FC00F92267 /* TLSSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C92EB7B1E03F3FC00F92267 /* TLSSocket.swift */; };
 		7C92EB891E03F3FC00F92267 /* WebSocketClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C92EB7C1E03F3FC00F92267 /* WebSocketClient.swift */; };
+		7C9FE5F11E18F9B900FB8166 /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9FE5F01E18F9B900FB8166 /* Socket.swift */; };
 		D42C5DF71E156BEE008CDA3C /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42C5DF61E156BEE008CDA3C /* URLSession.swift */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +78,7 @@
 		7C92EB7A1E03F3FC00F92267 /* SlackWebClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SlackWebClient.swift; path = Sources/SlackWebClient.swift; sourceTree = SOURCE_ROOT; };
 		7C92EB7B1E03F3FC00F92267 /* TLSSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLSSocket.swift; path = Sources/TLSSocket.swift; sourceTree = SOURCE_ROOT; };
 		7C92EB7C1E03F3FC00F92267 /* WebSocketClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebSocketClient.swift; path = Sources/WebSocketClient.swift; sourceTree = SOURCE_ROOT; };
+		7C9FE5F01E18F9B900FB8166 /* Socket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Socket.swift; path = Sources/Socket.swift; sourceTree = SOURCE_ROOT; };
 		7CBB81F21DC12E8B00DC0334 /* slash */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = slash; sourceTree = BUILT_PRODUCTS_DIR; };
 		D42C5DF61E156BEE008CDA3C /* URLSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = URLSession.swift; path = Sources/URLSession.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -117,6 +119,7 @@
 		7C4A725E1DE5CCB6005A72EF /* Slack */ = {
 			isa = PBXGroup;
 			children = (
+				7C9FE5F01E18F9B900FB8166 /* Socket.swift */,
 				7C92EB701E03F3FC00F92267 /* SlackChannel.swift */,
 				7C92EB711E03F3FC00F92267 /* SlackEmojiDecoder.swift */,
 				7C92EB721E03F3FC00F92267 /* SlackEvent.swift */,
@@ -259,6 +262,7 @@
 				D42C5DF71E156BEE008CDA3C /* URLSession.swift in Sources */,
 				7C92EB841E03F3FC00F92267 /* SlackRealTimeClient.swift in Sources */,
 				7C92EB851E03F3FC00F92267 /* SlackTeam.swift in Sources */,
+				7C9FE5F11E18F9B900FB8166 /* Socket.swift in Sources */,
 				7C92EB581E03F3C900F92267 /* TerminalDevice.swift in Sources */,
 				7C92EB571E03F3C900F92267 /* TerminalCanvas.swift in Sources */,
 				7C92EB591E03F3C900F92267 /* TextLayout.swift in Sources */,
