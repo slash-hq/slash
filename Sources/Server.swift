@@ -436,7 +436,7 @@ class MacOSAsyncTCPServer: TcpServer {
     
     func write(_ socket: Int32, _ data: Array<UInt8>, _ done: @escaping ((Void) -> TcpWriteDoneAction)) throws {
         
-        let result = Darwin.write(socket, data, data.count)
+        let result = Socket.write(socket, data, data.count)
         
         if result == -1 {
             defer { self.finish(socket) }
@@ -468,7 +468,7 @@ class MacOSAsyncTCPServer: TcpServer {
                     callback(.connect("", Int32(client)))
                 } else {
                     var chunk = [UInt8](repeating: 0, count: signal.data)
-                    let result = Darwin.read(Int32(signal.ident), &chunk, signal.data)
+                    let result = Socket.read(Int32(signal.ident), &chunk, signal.data)
                     if result <= 0 {
                         finish(Int32(signal.ident))
                         callback(.disconnect("", Int32(signal.ident)))
@@ -479,7 +479,7 @@ class MacOSAsyncTCPServer: TcpServer {
             case .write:
                 while let backlogElement = self.backlog[Int32(signal.ident)]?.first {
                     var chunk = backlogElement.chunk
-                    let result = Darwin.write(Int32(signal.ident), &chunk, min(chunk.count, signal.data))
+                    let result = Socket.write(Int32(signal.ident), chunk, min(chunk.count, signal.data))
                     if result == -1 {
                         finish(Int32(signal.ident))
                         callback(.disconnect("", Int32(signal.ident)))
@@ -517,15 +517,15 @@ class MacOSAsyncTCPServer: TcpServer {
     func finish(_ socket: Int32) {
         self.backlog[socket] = []
         self.peers.remove(socket)
-        let _ = Darwin.close(socket)
+        let _ = Socket.close(socket)
     }
     
     func closeAllOpenedSockets() {
         for client in self.peers {
-            let _ = Darwin.close(client)
+            let _ = Socket.close(client)
         }
         self.peers.removeAll(keepingCapacity: true)
-        let _ = Darwin.close(Int32(server))
+        let _ = Socket.close(Int32(server))
     }
     
     static func nonBlockingSocketForListenening(_ port: in_port_t = 8080) throws -> Int32 {
@@ -538,7 +538,7 @@ class MacOSAsyncTCPServer: TcpServer {
         
         var value: Int32 = 1
         if Darwin.setsockopt(server, SOL_SOCKET, SO_REUSEADDR, &value, socklen_t(MemoryLayout<Int32>.size)) == -1 {
-            defer { let _ = Darwin.close(server) }
+            defer { let _ = Socket.close(server) }
             throw AsyncError.setReuseAddrFailed(Process.error)
         }
         
@@ -548,12 +548,12 @@ class MacOSAsyncTCPServer: TcpServer {
         var addr = anyAddrForPort(port)
         
         if withUnsafePointer(to: &addr, { Darwin.bind(server, UnsafePointer<sockaddr>(OpaquePointer($0)), socklen_t(MemoryLayout<sockaddr_in>.size)) }) == -1 {
-            defer { let _ = Darwin.close(server) }
+            defer { let _ = Socket.close(server) }
             throw AsyncError.bindFailed(Process.error)
         }
         
         if Darwin.listen(server, SOMAXCONN) == -1 {
-            defer { let _ = Darwin.close(server) }
+            defer { let _ = Socket.close(server) }
             throw AsyncError.listenFailed(Process.error)
         }
         
