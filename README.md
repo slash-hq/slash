@@ -38,6 +38,8 @@ Ctrl-C : Quit
 /openurl <number> : open url with <number>
 ```
 
+<img src="GitHub/openurl_example.png" alt="logo" width="800px;"/>
+
 ## Retro mode
 
 Thanks too [cool-retro-term](https://github.com/Swordfish90/cool-retro-term) project slash can run in retro mode
