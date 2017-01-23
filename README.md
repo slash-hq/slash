@@ -32,6 +32,12 @@ Up/Down: Scroll messages
 Ctrl-C : Quit
 ```
 
+## Commands
+
+```
+/openurl <number> : open url with <number>
+```
+
 ## Retro mode
 
 Thanks too [cool-retro-term](https://github.com/Swordfish90/cool-retro-term) project slash can run in retro mode
