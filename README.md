@@ -3,6 +3,7 @@
 Slack terminal client.
 
 </br>
+
 ![screenshot](GitHub/scr.png)
 
 ## Getting started
