@@ -161,15 +161,15 @@ class WebSocketClient {
             offset = 4
         case 0x7F:
             guard inputBuffer.count > 9 else { return nil }
-            len = UInt64(littleEndian:
-                UInt64(inputBuffer[2]) << 54 |
-                UInt64(inputBuffer[3]) << 48 |
-                UInt64(inputBuffer[4]) << 40 |
-                UInt64(inputBuffer[5]) << 32 |
-                UInt64(inputBuffer[6]) << 24 |
-                UInt64(inputBuffer[7]) << 16 |
-                UInt64(inputBuffer[8]) << 8  |
-                UInt64(inputBuffer[9]))
+            let byte2 = UInt64(inputBuffer[2]) << 54
+            let byte3 = UInt64(inputBuffer[3]) << 48
+            let byte4 = UInt64(inputBuffer[4]) << 40
+            let byte5 = UInt64(inputBuffer[5]) << 32
+            let byte6 = UInt64(inputBuffer[6]) << 24
+            let byte7 = UInt64(inputBuffer[7]) << 16
+            let byte8 = UInt64(inputBuffer[8]) << 8
+            let byte9 = UInt64(inputBuffer[9])
+            len = UInt64(littleEndian: byte2 | byte3 | byte4 | byte5 | byte6 | byte7 | byte8 | byte9)
             offset = 10
         default:
             throw Err.invalidFrameLength("Not allowed frame length: \(len)")

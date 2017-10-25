@@ -142,7 +142,7 @@ protocol TcpServer {
     
     func wait(_ callback: ((TcpServerEvent) -> Void)) throws
     
-    func write(_ socket: Int32, _ data: Array<UInt8>, _ done: @escaping ((Void) -> TcpWriteDoneAction)) throws
+    func write(_ socket: Int32, _ data: Array<UInt8>, _ done: @escaping (() -> TcpWriteDoneAction)) throws
     
     func finish(_ socket: Int32)
 }
@@ -419,7 +419,7 @@ extension Process {
 
 class MacOSAsyncTCPServer: TcpServer {
     
-    private var backlog = Dictionary<Int32, Array<(chunk: [UInt8], done: ((Void) -> TcpWriteDoneAction))>>()
+    private var backlog = Dictionary<Int32, Array<(chunk: [UInt8], done: (() -> TcpWriteDoneAction))>>()
     private var peers = Set<Int32>()
     
     private let kernelQueue: KernelQueue
@@ -434,7 +434,7 @@ class MacOSAsyncTCPServer: TcpServer {
         self.kernelQueue.subscribe(server, .read)
     }
     
-    func write(_ socket: Int32, _ data: Array<UInt8>, _ done: @escaping ((Void) -> TcpWriteDoneAction)) throws {
+    func write(_ socket: Int32, _ data: Array<UInt8>, _ done: @escaping (() -> TcpWriteDoneAction)) throws {
         
         let result = Socket.write(socket, data, data.count)
         
