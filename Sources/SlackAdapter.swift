@@ -50,16 +50,16 @@ class SlackAdapter {
                 let presentableText = self.emojiDecoder.decode(self.decodeEscapedHTMLEntities(text))
                 spans.append(TextSpan(presentableText, withColor: R.color.messageTextColor))
             case .escaped(let encodedText):
-                guard let first = encodedText.characters.first else {
+                guard let first = encodedText.first else {
                     continue
                 }
                 switch first {
                     case "#":
                         fallthrough
                     case "@":
-                        let idStartIndex = encodedText.characters.index(encodedText.characters.startIndex, offsetBy: 1)
-                        if idStartIndex < encodedText.characters.endIndex {
-                            let id = encodedText.characters[idStartIndex..<(encodedText.characters.index(of: "|") ?? encodedText.characters.endIndex)]
+                        let idStartIndex = encodedText.index(encodedText.startIndex, offsetBy: 1)
+                        if idStartIndex < encodedText.endIndex {
+                            let id = encodedText[idStartIndex..<(encodedText.index(of: "|") ?? encodedText.endIndex)]
                             if let name = context.name(forId: String(id)) {
                                 spans.append(TextSpan(name, withColor: R.color.mentionTextColor))
                             }
@@ -94,11 +94,11 @@ class SlackAdapter {
         var tokens = [Token]()
         
         var buffer = [Character]()
-        buffer.reserveCapacity(message.characters.count)
+        buffer.reserveCapacity(message.count)
         
         var plainFlag = true
         
-        for (index, character) in message.characters.enumerated() {
+        for (index, character) in message.enumerated() {
             switch character {
                 case "<":
                     if !buffer.isEmpty {
@@ -114,7 +114,7 @@ class SlackAdapter {
                     plainFlag = true
                 default:
                     buffer.append(character)
-                    if index == message.characters.count - 1 {
+                    if index == message.count - 1 {
                         tokens.append(plainFlag ? .plain(String(buffer)) : .escaped(String(buffer)))
                     }
             }

@@ -56,7 +56,7 @@ class TextLayout {
             canvas.background(highlightColor ?? span.backgroundColor)
             canvas.color(span.textColor)
             
-            for character in span.text.characters {
+            for character in span.text {
                 if character == "\n" {
                     canvas.text(String(repeating: " ", count: width - counter))
                     counter = 0

@@ -244,7 +244,7 @@ class Application {
                 
             case .arrowRight:
                 
-                self.userInputView.cursor = min(userInputView.input.characters.count, userInputView.cursor + 1)
+                self.userInputView.cursor = min(userInputView.input.count, userInputView.cursor + 1)
                 self.userInputView.draw()
                 
             case .arrowUp:
@@ -305,7 +305,7 @@ class Application {
     func executeLocalCommand(_ command: String) -> Bool {
         if (command.hasPrefix("/openurl")) {
             let pieces = command.components(separatedBy: [",", " "])
-            let linkNumbers = pieces.flatMap { Int($0) }
+            let linkNumbers = pieces.compactMap { Int($0) }
             for linkNumber in linkNumbers {
                 let url = self.links[linkNumber - 1]
                 Utils.shell("open", url)

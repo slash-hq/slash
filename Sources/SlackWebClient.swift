@@ -27,7 +27,7 @@ class SlackWebClient {
         
         var method = "channels.history"
         
-        if let firstCharacter = channel.characters.first {
+        if let firstCharacter = channel.first {
             switch firstCharacter {
                 //TODO - This mapping is rather naive. There should be separated methods for: groups and ims.
                 case "C": method = "channels.history"

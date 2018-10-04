@@ -27,7 +27,7 @@ class ChannelsListView {
         
         let availableWidth = R.dimen.channelsListWidth
         
-        let paddedName = text.characters.count > availableWidth ? text.substring(to: text.index(text.startIndex, offsetBy: availableWidth)) :
+        let paddedName = text.count > availableWidth ? String(text[..<text.index(text.startIndex, offsetBy: availableWidth)]) :
             text.padding(toLength: availableWidth, withPad: " ", startingAt: 0)
         
         self.canvas
