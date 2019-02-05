@@ -58,7 +58,7 @@ class MessagesListView {
         
         lines: for row in rows {
             
-            let lines = self.textLayout.layout(row.spans, alignToWidth: size.width - column + 1)
+            let lines = self.textLayout.layout(row.spans, alignToWidth: size.width - column - 1)
             
             for line in lines.reversed() {
                 

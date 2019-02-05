@@ -6,6 +6,8 @@
 
 import Foundation
 
+setlocale(LC_CTYPE,"UTF-8")
+
 let device = try TerminalDevice()
 
 CrashReporter.watch(usingDevice: device)

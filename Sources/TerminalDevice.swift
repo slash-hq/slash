@@ -27,7 +27,7 @@ enum ControlKey {
     case arrowLeft
     case arrowRight
     
-    case other(UInt8)
+    case other(Character)
 }
 
 class TerminalDevice {
@@ -56,12 +56,10 @@ class TerminalDevice {
     }
     
     func key() -> ControlKey {
-        
-        var buffer: [UInt8] = [0, 0, 0, 0]
-        
-        read(fileno(stdin), &buffer, 1)
-        
-        switch buffer[0] {
+
+        let c = getwchar()
+
+        switch c {
             
             case 0: return .null
             case 3: return .ctrlC
@@ -77,16 +75,17 @@ class TerminalDevice {
             case 21: return .ctrlU
             
             case 27:
+         
+                let c1 = getwchar()
+                let c2 = getwchar()
                 
-                read(fileno(stdin), &buffer, 4)
-                
-                if buffer[0] == 0x5B {
-                    switch buffer[1] {
-                        case 0x41: return .arrowUp
-                        case 0x42: return .arrowDown
-                        case 0x44: return .arrowLeft
-                        case 0x43: return .arrowRight
-                        case 0x5A: return .tab(true)
+                if c1 == 91 {
+                    switch c2 {
+                        case 65: return .arrowUp
+                        case 66: return .arrowDown
+                        case 68: return .arrowLeft
+                        case 67: return .arrowRight
+                        case 90: return .tab(true)
                         default: break
                     }
                 }
@@ -95,7 +94,7 @@ class TerminalDevice {
                 
             case 127: return .backspace
                 
-            default: return .other(buffer[0])
+            default: return .other(Character(UnicodeScalar(Int(c))!))
         }
     }
     

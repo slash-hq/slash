@@ -283,7 +283,7 @@ class Application {
                 
             case .other(let character):
                 
-                self.userInputView.input.insert(Character(UnicodeScalar(character)),
+                self.userInputView.input.insert(character,
                     at: self.userInputView.input.index(self.userInputView.input.startIndex,
                        offsetBy: self.userInputView.cursor))
                 
