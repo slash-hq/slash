@@ -97,6 +97,8 @@ class R {
         static let linkTextColor = 11
         
         static let mentionTextColor = 37
+        
+        static let reactionTextColor = 15
     }
     
     class dimen {

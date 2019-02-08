@@ -37,7 +37,34 @@ class SlackAdapter {
         spans.append(TextSpan(": ", withColor: R.color.messagePrefixTextColor))
         spans.append(contentsOf: self.spansFor(message: message.text, withContext: context, andLinks: &links))
         
+        if !message.reactions.isEmpty {
+            let content = "\n      " + message.reactions.map({ emojiDecoder.decode( ":" + $0.name + ":" ) + reactionCounter(forCount: $0.count) } ).joined(separator: " ")
+            
+            spans.append(TextSpan(content, withColor: R.color.reactionTextColor, withBackground: R.color.defaultBgColor))
+        }
+        
         return spans
+    }
+    
+    func reactionCounter(forCount count: Int) -> String {
+        if count <= 1 {
+            return ""
+        }
+        return String(String(describing: count).map({ c in //TODO - Do it better with 'U+2080 + x' formula.
+            switch c {
+            case "0": return "₀"
+            case "1": return "₁"
+            case "2": return "₂"
+            case "3": return "₃"
+            case "4": return "₄"
+            case "5": return "₅"
+            case "6": return "₆"
+            case "7": return "₇"
+            case "8": return "₈"
+            case "9": return "₉"
+            default : return " "
+            }
+        }))
     }
     
     func spansFor(message: String, withContext context: SlackContext, andLinks links: inout [String]) -> [TextSpan] {

@@ -7,6 +7,7 @@
 import Foundation
 
 class Application {
+    
     private let terminalDevice                  : TerminalDevice
     private let messagesListView                : MessagesListView
     private let userInputView                   : UserInputView
@@ -133,6 +134,13 @@ class Application {
                 Process.launchedProcess(launchPath: "/usr/bin/osascript", arguments: ["-e", "display notification \"\(message)\" with title \"slash: \(title)\""])
             #endif
             return
+
+        case .messageReactionAdded(let reaction, let channel, let ts):
+
+            if channel == self.selectedChannel {
+                
+                self.messagesListView.draw(self.messages)
+            }
 
         case .unknown(let message):
             

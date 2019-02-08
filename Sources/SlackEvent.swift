@@ -11,6 +11,8 @@ enum SlackEvent {
     case message(SlackMessage)
     case messageChanged(SlackMessage)
     case messageDeleted(String, String)
+    case messageReactionAdded(String, String, String)
+    case messageReactionRemoved(String, String, String)
     case hello
     case reconnectUrl
     case userTyping(String, String)
@@ -25,7 +27,6 @@ enum SlackEvent {
     case groupMarked
     case mpimMarked
     case imMarked
-    case reactionAdded
     case userChange
     case reply(Int, String)
     case teamRename(String)

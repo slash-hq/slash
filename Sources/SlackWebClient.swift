@@ -45,12 +45,20 @@ class SlackWebClient {
         
         return messages.map { item in
             guard let dictionary = item as? Dictionary<String, Any> else {
-                return SlackMessage(ts: "", channel: "", user: "", text: "")
+                return SlackMessage(ts: "", channel: "", user: "", text: "", reactions: [])
             }
             return SlackMessage(ts: (dictionary["ts"] as? String) ?? "",
                 channel: channel,
                 user: (dictionary["user"] as? String) ?? "",
-                text: (dictionary["text"] as? String) ?? "")
+                text: (dictionary["text"] as? String) ?? "",
+                reactions: (dictionary["reactions"] as? [[String: Any]])?.map({ item in
+                    return SlackMessageReaction(
+                        name: item["name"] as? String ?? "",
+                        count: item["count"] as? Int ?? 0,
+                        users: item["users"] as? [String] ?? []
+                    )
+                }) ?? []
+            )
         }
     }
     

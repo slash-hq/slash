@@ -87,7 +87,15 @@ class SlackRealTimeClient {
                 case "im_marked":
                     return .imMarked
                 case "reaction_added":
-                    return .reactionAdded
+                    if let item = dictionary["item"] as? [String: Any] {
+                        if (item["type"] as? String) == "message" {
+                            let reaction = (dictionary["reaction"] as? String) ?? ""
+                            let channel = item["channel"] as? String ?? ""
+                            let ts = item["ts"] as? String ?? ""
+                            return .messageReactionAdded(reaction, channel, ts)
+                        }
+                    }
+                    return nil
                 case "user_change":
                     return .userChange
                 case "team_rename":
@@ -122,7 +130,7 @@ class SlackRealTimeClient {
                     let user = (updatedMessage["user"] as? String) ?? "unknown"
                     let ts = (updatedMessage["ts"] as? String) ?? ""
                     let text = (updatedMessage["text"] as? String) ?? ""
-                    return .messageChanged(SlackMessage(ts: ts, channel: channel, user: user, text: text))
+                    return .messageChanged(SlackMessage(ts: ts, channel: channel, user: user, text: text, reactions: []))
                 }
             case "message_deleted":
                 let ts = (dictionary["deleted_ts"] as? String) ?? ""
@@ -130,6 +138,6 @@ class SlackRealTimeClient {
             default:break
         }
         
-        return .message(SlackMessage(ts: ts, channel: channel, user: user, text: message))
+        return .message(SlackMessage(ts: ts, channel: channel, user: user, text: message, reactions: []))
     }
 }

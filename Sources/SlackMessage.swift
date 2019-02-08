@@ -12,5 +12,7 @@ struct SlackMessage {
     let channel: String
     let user: String
     let text: String
+    
+    let reactions: [SlackMessageReaction]
 }
 

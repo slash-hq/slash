@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2DB32B79220D933300D23E57 /* SlackMessageReaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB32B78220D933300D23E57 /* SlackMessageReaction.swift */; };
 		7C92EB571E03F3C900F92267 /* TerminalCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C92EB541E03F3C900F92267 /* TerminalCanvas.swift */; };
 		7C92EB581E03F3C900F92267 /* TerminalDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C92EB551E03F3C900F92267 /* TerminalDevice.swift */; };
 		7C92EB591E03F3C900F92267 /* TextLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C92EB561E03F3C900F92267 /* TextLayout.swift */; };
@@ -51,6 +52,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2DB32B78220D933300D23E57 /* SlackMessageReaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SlackMessageReaction.swift; path = Sources/SlackMessageReaction.swift; sourceTree = SOURCE_ROOT; };
 		7C92EB541E03F3C900F92267 /* TerminalCanvas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TerminalCanvas.swift; path = Sources/TerminalCanvas.swift; sourceTree = SOURCE_ROOT; };
 		7C92EB551E03F3C900F92267 /* TerminalDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TerminalDevice.swift; path = Sources/TerminalDevice.swift; sourceTree = SOURCE_ROOT; };
 		7C92EB561E03F3C900F92267 /* TextLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextLayout.swift; path = Sources/TextLayout.swift; sourceTree = SOURCE_ROOT; };
@@ -126,6 +128,7 @@
 				7C92EB731E03F3FC00F92267 /* SlackGroup.swift */,
 				7C92EB741E03F3FC00F92267 /* SlackIM.swift */,
 				7C92EB751E03F3FC00F92267 /* SlackMessage.swift */,
+				2DB32B78220D933300D23E57 /* SlackMessageReaction.swift */,
 				7C92EB761E03F3FC00F92267 /* SlackOAuth2.swift */,
 				7C92EB771E03F3FC00F92267 /* SlackRealTimeClient.swift */,
 				7C92EB781E03F3FC00F92267 /* SlackTeam.swift */,
@@ -241,6 +244,7 @@
 				7C92EB801E03F3FC00F92267 /* SlackGroup.swift in Sources */,
 				7C92EB6B1E03F3ED00F92267 /* Server.swift in Sources */,
 				7C92EB6E1E03F3ED00F92267 /* UserInputView.swift in Sources */,
+				2DB32B79220D933300D23E57 /* SlackMessageReaction.swift in Sources */,
 				7C92EB691E03F3ED00F92267 /* MessagesListView.swift in Sources */,
 				7C92EB881E03F3FC00F92267 /* TLSSocket.swift in Sources */,
 				7C92EB6F1E03F3ED00F92267 /* Utils.swift in Sources */,
